@@ -150,7 +150,7 @@ window.onload = function() {
 			styleClass: 'cmd'
 		});
 			
-		node.value = '';
+		node.select();
 		node.focus();
 
 		return false;

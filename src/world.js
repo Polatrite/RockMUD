@@ -427,11 +427,13 @@ World.prototype.loadArea = function(areaName, fn) {
 		if (fnd) {
 			return fn(area, true);
 		} else {
-			var area = require('../areas/midgaard'),
+			var area = require('../areas/' + areaName.toLowerCase().trim()),
 			i = 0,
 			room,
 			mob,
 			item;
+			
+			console.log('Loading area ' + areaName);
 
 			for (i; i < area.rooms.length; i += 1) {
 				(function(room) {
@@ -501,7 +503,7 @@ World.prototype.getAlItemsFromArea = function(areaName, fn) {
 World.prototype.checkArea = function(areaName, fn) {
 	var i = 0;
 
-	for (i; this.areas.length; i += 1) {
+	for (i; i < this.areas.length; i += 1) {
 		if (this.areas[i].name === areaName) {
 			return fn(true, this.areas[i]);
 		}
@@ -532,9 +534,9 @@ World.prototype.prompt = function(target) {
 		player = target;
 	}
 
-	prompt = '<' + player.chp + '/'  + player.hp + '<span class="red">hp</span>><' +
-		player.cmana + '/'  + player.mana + '<span class="blue">m</span>><' + 
-		player.cmv + '/'  + player.mv +'<span class="yellow">mv</span>>';
+	prompt = '<<span class="red">' + player.chp + '/'  + player.hp + 'hp</span> <span class="blue">' +
+		player.cmana + '/'  + player.mana + 'm</span> <span class="green">' +
+		player.cmv + '/'  + player.mv +'mv</span>>';
 
 	if (player.role === 'admin') {
 		prompt += '<' + player.wait + 'w>';

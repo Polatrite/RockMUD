@@ -359,12 +359,12 @@ Cmd.prototype.move = function(target, command, fn) {
 											}
 
 											World.msgRoom(targetRoom, {
-												msg:'<strong>' + target.displayName + '</strong> enters the room from the ' + exitObj.cmd,
+												msg:'<strong>' + target.displayName + '</strong> has arrived from the ' + exitObj.cmd + '.',
 												playerName: target.name
 											});
 
 											World.msgRoom(roomObj, {
-												msg: '<span class="yellow">' + target.displayName + ' leaves the room heading <strong>' + direction + '</strong></div>',
+												msg: '<strong>' + target.displayName + '</strong> leaves ' + direction + '.',
 												playerName: target.name
 											});
 
@@ -485,13 +485,13 @@ Cmd.prototype.get = function(target, command, fn) {
 							Character.addToInventory(target, item, function(target, item) {
 								if (item) {
 									World.msgRoom(roomObj, {
-										msg: target.displayName + ' picks up a ' + item.short,
+										msg: target.displayName + ' picks up a ' + item.short + '.',
 										playerName: target.name,
 										styleClass: 'cmd-get yellow'
 									});
 
 									World.msgPlayer(target, {
-										msg: 'You pick up a ' + item.short,
+										msg: 'You pick up a ' + item.short + '.',
 										styleClass: 'cmd-get blue'
 									});
 
@@ -523,13 +523,13 @@ Cmd.prototype.get = function(target, command, fn) {
 						Character.addToInventory(target, item, function(target, item) {
 							if (i === itemLen - 1) {
 								World.msgRoom(roomObj, {
-									msg: target.displayName + ' picks up everything he can.',
+									msg: target.displayName + ' picks up everything they can.',
 									playerName: target.name,
 									styleClass: 'cmd-get-all yellow'
 								});
 
 								World.msgPlayer(target, {
-									msg: 'You grab everything',
+									msg: 'You grab everything you can.',
 									styleClass: 'cmd-get-all blue'
 								});
 

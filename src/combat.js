@@ -222,7 +222,7 @@ Combat.prototype.processFight = function(player, opponent, roomObj, fn) {
 	player.opponent = opponent;
 
 	World.msgPlayer(player, {
-		msg: 'You scream and charge at a ' + opponent.name,
+		msg: 'You attack ' + opponent.name + '!',
 		noPrompt: true
 	});
 
@@ -248,12 +248,12 @@ Combat.prototype.processFight = function(player, opponent, roomObj, fn) {
 
 				World.msgPlayer(player, {
 					msg: msgForPlayer,
-					styleClass: 'player-hit yellow'
+					styleClass: 'player-hit'
 				});
 
 				World.msgPlayer(opponent, {
 					msg: msgForOpponent,
-					styleClass: 'player-hit yellow'
+					styleClass: 'player-hit'
 				});
 
 				if (opponent.chp > 0) {
@@ -338,13 +338,13 @@ Combat.prototype.round = function(combatInterval, player, opponent, roomObj, fn)
 					World.msgPlayer(player, {
 						msg: msgForPlayer,
 						noPrompt: true,
-						styleClass: 'player-hit yellow'
+						styleClass: 'player-hit'
 					});
 
 					World.msgPlayer(opponent, {
 						msg: msgForOpponent,
 						noPrompt: true,
-						styleClass: 'player-hit yellow'
+						styleClass: 'player-hit'
 					});
 
 					if (player.position !== 'fighting' || opponent.position !== 'fighting') {

@@ -36,6 +36,10 @@ module.exports = {
 				}, {
 					"cmd" : "west",
 					"id" : 5
+				}, {
+					"cmd" : "up",
+					"id" : 1002,
+					"area": "Colosseum"
 				},
 				{
 					"cmd" : "down",

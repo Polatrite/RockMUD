@@ -429,7 +429,20 @@ Character.prototype.save = function(player, fn) {
 	});
 };
 
+Character.prototype.hpHeal = function(target, value) {
+	target.chp = Math.min(target.hp, target.chp + value);
+};
+
+Character.prototype.manaHeal = function(target, value) {
+	target.cmana = Math.min(target.mana, target.cmana + value);
+};
+
+Character.prototype.mvHeal = function(target, value) {
+	target.cmv = Math.min(target.mv, target.cmv + value);
+};
+
 Character.prototype.hpRegen = function(target, fn) {
+	var character = this;
 	var conMod = World.dice.getConMod(target);
 
 	// unless the charcter is a fighter they have 
@@ -447,11 +460,7 @@ Character.prototype.hpRegen = function(target, fn) {
 		World.dice.roll(conMod, 4, function(total) {
 			total = total + target.level;
 
-			target.chp += total;
-
-			if (target.chp > target.hp) {
-				target.chp = target.hp;
-			}
+			character.hpHeal(target, total);
 
 			if (typeof fn === 'function') {
 				fn(target, total);
@@ -465,6 +474,7 @@ Character.prototype.hpRegen = function(target, fn) {
 };
 
 Character.prototype.manaRegen = function(target, fn) {
+	var character = this;
 	var intMod = World.dice.getIntMod(target);
 
 	if (target.cmana < target.mana && target.thirst < 5 && target.hunger < 6) {
@@ -482,11 +492,8 @@ Character.prototype.manaRegen = function(target, fn) {
 		World.dice.roll(intMod, 8, function(total) {
 			total = total + target.level;
 
-			target.chp += total;
+			character.manaHeal(target, total);
 
-			if (target.cmana  > target.mana ) {
-				target.cmana  = target.mana ;
-			}
 
 			if (typeof fn === 'function') {
 				fn(target, total);
@@ -500,6 +507,7 @@ Character.prototype.manaRegen = function(target, fn) {
 };
 
 Character.prototype.mvRegen = function(target, fn) {
+	var character = this;
 	var dexMod = World.dice.getDexMod(target);
 
 	// unless the charcter is a thief they have 
@@ -517,11 +525,7 @@ Character.prototype.mvRegen = function(target, fn) {
 		}
 
 		World.dice.roll(dexMod, 8, function(total) {
-			target.cmv += total;
-
-			if (target.cmv > target.mv) {
-				target.cmv = target.mv;
-			}
+			character.mvHeal(target, total);
 
 			if (typeof fn === 'function') {
 				fn(target, total);
